@@ -4,7 +4,10 @@
 
 ### Update docker container parameters
 ```
-# change the restart policy
+# Check the policy
+docker inspect --format '{{.HostConfig.RestartPolicy.Name}}' [container name]
+
+# Change the restart policy
 docker update --restart always [container name]
 ```
 
@@ -49,6 +52,14 @@ sudo lsof -i -P -n | grep -i listen | grep -i docker
 ```
 # Check all running container names
 docker ps --format "{{ .Names }}"
+```
+
+### Looking for a docker volume with the standard naming
+
+```
+docker inspect -f "{{ .Mounts }}" [container name] | grep -oP '([0-9a-z]){20,}' | head -1
+# -o : display match regex only
+# -P : perl regex (-e is not working)
 ```
 
 ## Ansible tips
