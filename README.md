@@ -29,6 +29,12 @@ docker run -d
   [name of the image generated previously]
 ```
 
+### Find a standard docker volume
+
+```
+docker inspect -f "{{ .Mounts }}" convertigo$i | grep -oP '([0-9a-z]){20,}' | head -1
+```
+
 ### Copy the content from a docker volume to an other one
 
 ```
